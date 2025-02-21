@@ -207,3 +207,19 @@ npx package-name
 - Doesn't install permanently
 - Good for trying packages or occasional use
 - Example: `npx serve public`
+
+### Build Output Directories
+
+Common naming conventions for build output directories:
+
+- **dist/** (distribution)
+  - Very common in JavaScript/Node.js projects
+  - Standard with build tools like Webpack, Vite, or Rollup
+  - Name implies "distributable" code ready for production
+
+- **public/**
+  - Common in React projects and static site generators
+  - Often used for static assets and built files
+  - Our project uses this convention
+
+Both serve the same purpose: containing the final, processed files ready for deployment.

@@ -2,7 +2,8 @@
 node_modules/
 
 # Build output
-public/
+public/*
+!public/index.html
 
 # Environment files
 .env

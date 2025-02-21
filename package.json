@@ -1,0 +1,21 @@
+{
+  "name": "static-site",
+  "version": "1.0.0",
+  "description": "A lightweight static site generator using HTML, CSS, JavaScript, and basic Node.js libraries.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "npx serve public",
+    "clean": "rm -rf public/*",
+    "start": "npm run build && npm run dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "fs-extra": "^11.3.0",
+    "marked": "^15.0.7",
+    "node": "^18.20.7"
+  }
+}

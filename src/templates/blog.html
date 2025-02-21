@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - CMO AI Hub</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/">CMO AI Hub</a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-badge">AI</a>
+                <a href="/community" class="nav-badge">CMO COMMUNITY</a>
+                <a href="/insights" class="nav-badge">INSIGHTS</a>
+                <a href="/connect" class="nav-badge">CONNECT</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <article class="blog-post">
+            <h1>{{title}}</h1>
+            <div class="post-meta">
+                <time datetime="{{date}}">{{dateFormatted}}</time>
+            </div>
+            {{{content}}}
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 CMO AI Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

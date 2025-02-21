@@ -1,6 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { marked } = require('marked');
+const matter = require('gray-matter');
+const moment = require('moment');
 
 // Ensure build directories exist
 fs.ensureDirSync('public');
@@ -59,4 +61,47 @@ async function buildPages() {
     }
 }
 
-buildPages().catch(console.error); 
+// Add this function to process blog posts
+async function processBlogPosts() {
+    const blogDir = path.join(__dirname, '../src/content/blog');
+    const blogTemplate = await fs.readFile(path.join(__dirname, '../src/templates/blog.html'), 'utf8');
+    
+    // Create blog directory if it doesn't exist
+    await fs.mkdir(path.join(__dirname, '../public/blog'), { recursive: true });
+    
+    const blogFiles = await fs.readdir(blogDir);
+    
+    for (const file of blogFiles) {
+        if (file.endsWith('.md')) {
+            const content = await fs.readFile(path.join(blogDir, file), 'utf8');
+            const { data, content: htmlContent } = matter(content);
+            const rendered = marked(htmlContent);
+            
+            // Format the date
+            const dateFormatted = moment(data.date).format('MMMM D, YYYY');
+            
+            const html = blogTemplate
+                .replace('{{title}}', data.title)
+                .replace('{{date}}', data.date)
+                .replace('{{dateFormatted}}', dateFormatted)
+                .replace('{{{content}}}', rendered);
+            
+            // Create a directory for each post
+            const slug = file.replace('.md', '');
+            const postDir = path.join(__dirname, '../public/blog', slug);
+            await fs.mkdir(postDir, { recursive: true });
+            
+            // Write index.html in the post directory
+            const outputFile = path.join(postDir, 'index.html');
+            await fs.writeFile(outputFile, html);
+        }
+    }
+}
+
+// Add to the main build function
+async function build() {
+    await buildPages();
+    await processBlogPosts();
+}
+
+build().catch(console.error); 
